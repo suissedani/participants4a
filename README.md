@@ -13,4 +13,8 @@ Skeleton of participants module
 
 - Herminio García González (@herminiogg)
 - Jose Emilio Labra Gayo (@labra)
+- Daniel Iglesias Suárez
+- Alan Padierna
+- Daniel Toimil
+- Daniel González García
 
