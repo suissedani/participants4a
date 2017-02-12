@@ -1,38 +1,60 @@
 package asw.persistance.util;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+import java.io.IOException;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class Hibernate {
-	private static final SessionFactory sessionFactory;
 
-	private static ServiceRegistry serviceRegistry;
+	private static EntityManagerFactory emf = null;
+	private static ThreadLocal<EntityManager> emThread = new ThreadLocal<EntityManager>();
 
-	static {
+	public static EntityManager createEntityManager() {
+		EntityManager entityManager = getEmf().createEntityManager();
+		emThread.set(entityManager);
+		return entityManager;
+	}
 
-		try {
+	public static EntityManager getManager() {
+		return emThread.get();
+	}
 
-			Configuration configuration = new Configuration();
-			configuration.configure();
-			serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties())
-					.getBootstrapServiceRegistry();
-			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-		} catch (Throwable th) {
-
-			System.err.println("Enitial SessionFactory creation failed" + th);
-
-			throw new ExceptionInInitializerError(th);
-
+	private static EntityManagerFactory getEmf() {
+		if (emf == null) {
+			String persistenceUnitName = loadPersistentUnitName();
+			emf = Persistence.createEntityManagerFactory(persistenceUnitName);
 		}
-
+		return emf;
 	}
 
-	public static SessionFactory getSessionFactory() {
+	private static String loadPersistentUnitName() {
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(Hibernate.class.getResourceAsStream("/META-INF/persistence.xml"));
 
-		return sessionFactory;
+			doc.getDocumentElement().normalize();
+			NodeList nl = doc.getElementsByTagName("persistence-unit");
 
+			return ((Element) nl.item(0)).getAttribute("name");
+
+		} catch (ParserConfigurationException e1) {
+			throw new RuntimeException(e1);
+		} catch (SAXException e1) {
+			throw new RuntimeException(e1);
+		} catch (IOException e1) {
+			throw new RuntimeException(e1);
+		}
 	}
+
 }
