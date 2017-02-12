@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import asw.business.exception.BusinessException;
+
 @Entity
 @Table(name = "citizen")
 public class Usuario {
@@ -106,16 +108,34 @@ public class Usuario {
 		this.numero_identificativo = numero_identificativo;
 	}
 
-	String getContraseña() {
+	String _getContraseña() {
 		return contraseña;
 	}
 
-	void setContraseña(String contraseña) {
+	void _setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
 
 	public Long getId() {
 		return id;
+	}
+
+	/**
+	 * Cambia la contraseña antigua por la nueva
+	 * 
+	 * @param contraseñaVieja
+	 *            la antigua contraseña que se quiere cambiar
+	 * @param contraseñaNueva
+	 *            la nueva contraseña que se quiere establecer
+	 * @throws BusinessException
+	 *             Ocurre una excepción si el usuario introduce mal la vieja
+	 *             contraseña
+	 */
+	public void updateContraseña(String contraseñaVieja, String contraseñaNueva) throws BusinessException {
+		if (contraseñaVieja.equals(_getContraseña()))
+			_setContraseña(contraseñaNueva);
+		else
+			throw new BusinessException("La contraseña es incorrecta");
 	}
 
 	@Override
