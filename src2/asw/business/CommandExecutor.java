@@ -8,7 +8,7 @@ import asw.persistance.util.Hibernate;
 
 public class CommandExecutor {
 	public Object execute(Command cmd) throws BusinessException {
-		EntityManager mapper = Hibernate.getSessionFactory().createEntityManager();
+		EntityManager mapper = Hibernate.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();
 		try {
