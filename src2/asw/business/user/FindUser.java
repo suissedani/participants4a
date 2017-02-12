@@ -46,7 +46,7 @@ public class FindUser implements Command {
 	 */
 	private void assertNotNull(List<Usuario> usuarios) throws BusinessException {
 		if (usuarios.isEmpty())
-			throw new BusinessException("No hay usuarios con dichas credenciales");
+			throw new BusinessException("El e-mail o la contraseña son incorrectos");
 	}
 
 }

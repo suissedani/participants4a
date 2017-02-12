@@ -14,7 +14,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class Hibernate {
+public class Jpa {
 
 	private static EntityManagerFactory emf = null;
 	private static ThreadLocal<EntityManager> emThread = new ThreadLocal<EntityManager>();
@@ -41,7 +41,7 @@ public class Hibernate {
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document doc = db.parse(Hibernate.class.getResourceAsStream("/META-INF/persistence.xml"));
+			Document doc = db.parse(Jpa.class.getResourceAsStream("/META-INF/persistence.xml"));
 
 			doc.getDocumentElement().normalize();
 			NodeList nl = doc.getElementsByTagName("persistence-unit");
