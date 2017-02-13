@@ -33,6 +33,6 @@ public class CommandExecutor {
 		} finally {
 			if (mapper.isOpen())
 				mapper.close();
-		}
+		}//Prueba
 	}
 }
