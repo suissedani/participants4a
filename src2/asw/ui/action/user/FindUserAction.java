@@ -7,11 +7,11 @@ import asw.ui.action.Action;
 public class FindUserAction implements Action {
 
 	private String email;
-	private String contraseña;
+	private String password;
 
 	@Override
 	public void execute() throws Exception {
-		Usuario user = new FindUser(email, contraseña).execute();
+		Usuario user = new FindUser(email, password).execute();
 	}
 
 }

@@ -6,12 +6,12 @@ import asw.ui.action.Action;
 
 public class UpdatePasswordAction implements Action {
 
-	private String contraseñaAntigua;
-	private String contraseñaNueva;
+	private String passAntigua;
+	private String passNueva;
 
 	@Override
 	public void execute() throws Exception {
-		Usuario user = new UpdatePassword(u, contraseñaAntigua, contraseñaNueva).execute();
+		Usuario user = new UpdatePassword(u, passAntigua, passNueva).execute();
 	}
 
 }

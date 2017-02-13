@@ -10,16 +10,16 @@ import asw.persistance.UsuarioFinder;
 public class FindUser implements Command {
 
 	private String email;
-	private String contraseña;
+	private String password;
 
-	public FindUser(String email, String contraseña) {
+	public FindUser(String email, String password) {
 		this.email = email;
-		this.contraseña = contraseña;
+		this.password = password;
 	}
 
 	@Override
 	public Usuario execute() throws BusinessException {
-		List<Usuario> usuarios = UsuarioFinder.findUserByEmailPass(email, contraseña);
+		List<Usuario> usuarios = UsuarioFinder.findUserByEmailPass(email, password);
 		assertNotNull(usuarios);
 		assertOnlyOne(usuarios);
 		return usuarios.get(0);

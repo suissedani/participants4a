@@ -6,20 +6,20 @@ import asw.model.Usuario;
 
 public class UpdatePassword implements Command {
 
-	private String contraseñaAntigua;
-	private String contraseñaNueva;
+	private String passAntigua;
+	private String passNueva;
 	private Usuario user;
 
-	public UpdatePassword(Usuario u, String contraseñaAntigua, String contraseñaNueva) {
+	public UpdatePassword(Usuario u, String passAntigua, String passNueva) {
 		super();
-		this.contraseñaAntigua = contraseñaAntigua;
-		this.contraseñaNueva = contraseñaNueva;
+		this.passAntigua = passAntigua;
+		this.passNueva = passNueva;
 		this.user = u;
 	}
 
 	@Override
 	public Usuario execute() throws BusinessException {
-		user.updateContraseña(contraseñaAntigua, contraseñaNueva);
+		user.updateContraseña(passAntigua, passNueva);
 		return user;
 
 	}
