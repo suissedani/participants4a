@@ -132,7 +132,7 @@ public class Usuario {
 	 *             contraseña
 	 */
 	public void updateContraseña(String passVieja, String passNueva) throws BusinessException {
-		if (passVieja.equals(_getContraseña()) && passNueva!=null && passVieja!=null && passNueva!=passVieja)
+		if (passVieja.equals(_getContraseña()))
 			_setContraseña(passNueva);
 		else
 			throw new BusinessException("La contraseña es incorrecta");
