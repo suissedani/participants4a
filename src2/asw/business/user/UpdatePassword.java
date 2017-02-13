@@ -44,17 +44,6 @@ public class UpdatePassword implements Command {
 	/**
 	 * Comprueba que el campo no son nulos
 	 * 
-	 * @param emailAntiguo2
-	 *            el email antiguo introducido por el usuario
-	 * @param emailNuevo2
-	 *            el email nuevo introducido por el usuario
-	 * @throws BusinessException
-	 *             Si alguno de los campos es nulo
-	 */
-
-	/**
-	 * Comprueba que el campo no son nulos
-	 * 
 	 * @param passNueva
 	 *            la contraseña nueva introducida por el usuario
 	 * @param passVieja
