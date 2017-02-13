@@ -30,16 +30,16 @@ public class Usuario {
 	private String direccion_postal;
 	private String nacionalidad;
 	private String numero_identificativo;
-	private String contraseña;
+	private String password;
 
 	public Usuario(String email, String contraseña) {
 		super();
 		this.email = email;
-		this.contraseña = contraseña;
+		this.password = contraseña;
 	}
 
 	public Usuario(Long id, String nombre, String apellidos, String email, Date fecha_nacimiento,
-			String direccion_postal, String nacionalidad, String numero_identificativo, String contraseña) {
+			String direccion_postal, String nacionalidad, String numero_identificativo, String password) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -49,7 +49,7 @@ public class Usuario {
 		this.direccion_postal = direccion_postal;
 		this.nacionalidad = nacionalidad;
 		this.numero_identificativo = numero_identificativo;
-		this.contraseña = contraseña;
+		this.password = password;
 	}
 
 	public String getNombre() {
@@ -109,11 +109,11 @@ public class Usuario {
 	}
 
 	String _getContraseña() {
-		return contraseña;
+		return password;
 	}
 
 	void _setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+		this.password = contraseña;
 	}
 
 	public Long getId() {
@@ -123,17 +123,17 @@ public class Usuario {
 	/**
 	 * Cambia la contraseña antigua por la nueva
 	 * 
-	 * @param contraseñaVieja
+	 * @param passVieja
 	 *            la antigua contraseña que se quiere cambiar
-	 * @param contraseñaNueva
+	 * @param passNueva
 	 *            la nueva contraseña que se quiere establecer
 	 * @throws BusinessException
 	 *             Ocurre una excepción si el usuario introduce mal la vieja
 	 *             contraseña
 	 */
-	public void updateContraseña(String contraseñaVieja, String contraseñaNueva) throws BusinessException {
-		if (contraseñaVieja.equals(_getContraseña()))
-			_setContraseña(contraseñaNueva);
+	public void updateContraseña(String passVieja, String passNueva) throws BusinessException {
+		if (passVieja.equals(_getContraseña()) && passNueva!=null && passVieja!=null && passNueva!=passVieja)
+			_setContraseña(passNueva);
 		else
 			throw new BusinessException("La contraseña es incorrecta");
 	}
